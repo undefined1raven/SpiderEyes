@@ -26,23 +26,28 @@ Running the app locally requires accounts for the following (free) services:
 
 A local Node env is also required. 
 
-### Running the frontend  
+## Running the frontend  
 1. Follow the instructions [here](https://nuxtjs.org/docs/get-started/installation/) to install Nuxt.
 2. Copy the contents of the folders in the "frontend" folder to the corresponding folders in the newly created Nuxt project in step 1.
 3. Run ```npm i && npm run build && npm run dev``` to make sure npm pkgs are installed correctly, to build and to run the code.
 4. Use the link in the console after step 3 is done to access the frontend
 
-### Running the backend
+## Running the backend
 1. Install the Vercel CLI as shown [here](https://vercel.com/docs/cli)
 2. Run ```npm i && vercel dev``` to install npm pkgs and run the backend locally
 3. Make sure the frontend components (Main.vue, login.vue, signup.vue) that call the API are pointing at the local backend 
+
+## Deploying the app
+1. Make a github repo with the frontend
+2. Make a github repo with the backend
+3. Make sure to replace the placeholders credentials with your actual credentials such as the Mongo DB connect link and Firebase keys 
+4. Log into your Vercel account and create new apps for both the F/E and B/E repos. This requires selecting the right repo for each app
 
 ## Repo structure:
 api/<br />
 ├─ auth.js        (Handles auth requests and session)<br />
 ├─ dbop.js        (Handles all Mongo DB CRUD Ops)<br />
 frontend/<br />
-├─ .vercel/       (Required for Vercel integration. Auto generated)<br />
 ├─ components/    (App components)<br />
 ├─ composables/   (Common functions used by the app)<br />
 ├─ pages/         (Autorouting)<br />
