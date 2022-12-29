@@ -15,6 +15,7 @@ Dream tracking app using nuxt for the frontend and Vercel serverless functions f
  
 ## Future Features 
 - Analytics showing patterns over time
+- Adding visual feedback to the auth process so the user would know the backend is checking the credentials provided (this is required because it takes a while for vercel to spin up a serverless instance) 
 
 ## How to run
 
