@@ -1,6 +1,20 @@
 # SpiderEyes
 
+[Go to the app](https://spider-eyes-nuxt.vercel.app/)
+
 Dream tracking app using nuxt for the frontend and Vercel serverless functions for the backend. Mongo DB is used for persistent user data(account, the dream objects) storage while the Firebase Realtime Database is used for session management. 
+
+## Current Features
+- Saving new dreams that contain details such as:
+  - Feelings and sensations and their intensities
+  - A detailed description
+  - Sleep duration
+  - Quality indicators such as continuity, realism and others
+  - The type timeline of the dream (active(lucid) vs natural)
+  - References in the dream that might be recurring
+ 
+## Future Features 
+- Analytics showing patterns over time
 
 ## How to run
 
@@ -28,7 +42,7 @@ api/<br />
 ├─ auth.js        (Handles auth requests and session)<br />
 ├─ dbop.js        (Handles all Mongo DB CRUD Ops)<br />
 frontend/<br />
-├─ .vercel/       (Required for Vercel integration)<br />
+├─ .vercel/       (Required for Vercel integration. Auto generated)<br />
 ├─ components/    (App components)<br />
 ├─ composables/   (Common functions used by the app)<br />
 ├─ pages/         (Autorouting)<br />
