@@ -1,0 +1,29 @@
+{
+  "name": "spidereyes-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/undefined1raven/SpiderEyes-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/undefined1raven/SpiderEyes-api/issues"
+  },
+  "homepage": "https://github.com/undefined1raven/SpiderEyes-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie": "^0.5.0",
+    "firebase": "^9.14.0",
+    "firebase-admin": "^11.3.0",
+    "micro-cors": "^0.1.1",
+    "mongoose": "^6.7.0",
+    "UAC_v2": "file:./models/udata_v2.js",
+    "uuid": "^9.0.0"
+  }
+}
