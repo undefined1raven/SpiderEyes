@@ -6,9 +6,9 @@ Dream tracking app using nuxt for the frontend and Vercel serverless functions f
 
 There is already a live deployment available at https://spider-eyes-nuxt.vercel.app/.
 Running the app locally requires accounts for the following (free) services:
--Vercel
--Firebase
--Mongo DB
+- Vercel
+- Firebase
+- Mongo DB
 
 ## Repo structure:
 api/
