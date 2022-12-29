@@ -1,7 +1,8 @@
 # SpiderEyes
 
-Dream tracking app using nuxt for the frontend and Vercel serverless functions for the backend. Mongo DB is used for persistent user data(account, the dream objects) storage while the Firebase Realtime Database is used for session management. 
-Commit history for the development of this project is not available in order to prevent the expose of API keys. This repo reflects the code in the private repos used to run the app.
+Dream tracking app[^1] using nuxt for the frontend and Vercel serverless functions for the backend. Mongo DB is used for persistent user data(account, the dream objects) storage while the Firebase Realtime Database is used for session management. 
+
+[^1]: Commit history for the development of this project is not available in order to prevent API keys from being public. This repo reflects the code in the private repos used to run the app.
 
 ## How to run
 
