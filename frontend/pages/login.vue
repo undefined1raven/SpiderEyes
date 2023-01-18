@@ -41,17 +41,17 @@ export default {
           })
           .then((r) => {
             console.log(r.data)
-            if(r.data.status != undefined){
-              if(r.data.status){
+            if (r.data.status != undefined) {
+              if (r.data.status) {
                 sessionStorage.setItem('AT', r.data.AT)
                 sessionStorage.setItem('un', r.data.username)
                 window.location.pathname = '/'
-              }else{
-                this.isErrorLabelDisplayed = true;
+              } else {
+                this.isErrorLabelDisplayed = true
                 this.passwordIn = ''
                 setTimeout(() => {
-                  this.isErrorLabelDisplayed = false;
-                }, 3000);
+                  this.isErrorLabelDisplayed = false
+                }, 3000)
               }
             }
           })
@@ -99,7 +99,7 @@ export default {
 .tini-leave-to {
   opacity: 0;
 }
-#auth_failed_l{
+#auth_failed_l {
   top: 77.314814815%;
   left: 40.364583333%;
   width: 19.479166667%;
@@ -107,8 +107,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, rgba(255, 0, 61, 0.2) 0%, rgba(255, 0, 61, 0) 100%);
-  border-top: solid 1px #FF003D;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 0, 61, 0.2) 0%,
+    rgba(255, 0, 61, 0) 100%
+  );
+  border-top: solid 1px #ff003d;
 }
 #uid_l {
   top: 40.37037037%;
@@ -201,6 +205,60 @@ export default {
   height: 5.277777778%;
   width: 41.510416667%;
 }
+@media only screen and (max-width: 700px) and (max-height: 900px) {
+  #login_deco {
+    top: 0%;
+    height: 21.09375%;
+    width: 100%;
+    left: 0%;
+    overflow: hidden;
+  }
+  #logo{
+    top: 20.375%;
+    width: 85.947222222%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  #login_ln_1, #login_ln_0{
+    width: 100%;
+    left: 0%;
+  }
+  #login_ln_1{
+    top: 77.03125%;
+  }
+  #uid_input, #password_input{
+    width: 85.555555556%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  #uid_input{
+    top: 49.6875%;
+  }
+  #password_input{
+    top: 64.21875%;
+  }
+  #uid_l{
+    top: 45.625%;
+  }
+  #password_l{
+    top: 60.15625%;
+  }
+  #login_btn, #create_account_btn{
+    width: 85.555555556% !important;
+    left: 50%;
+    height: 6% !important;;
+    transform: translate(-50%);
+  }
+  #login_btn{
+    top: 79.84375%;
+  }
+  #create_account_btn{
+    top: 89.6875%;
+  }
+  .primary_l{
+    left: 6.222222222%;
+  }
+}
 </style>
 
 <style>
@@ -213,6 +271,9 @@ body {
     #060012 61.28%,
     #020013 100%
   );
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 ul {
   position: absolute;
