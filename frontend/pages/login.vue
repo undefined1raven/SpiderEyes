@@ -214,7 +214,7 @@ export default {
     overflow: hidden;
   }
   #logo{
-    top: 20.375%;
+    top: 21.575%;
     width: 85.947222222%;
     left: 50%;
     transform: translate(-50%);
@@ -223,12 +223,16 @@ export default {
     width: 100%;
     left: 0%;
   }
+  #login_ln_0{
+    top: 41.5%;
+  }
   #login_ln_1{
-    top: 77.03125%;
+    top: 74.803125%;
   }
   #uid_input, #password_input{
     width: 85.555555556%;
     left: 50%;
+    height: 6%;
     transform: translate(-50%);
   }
   #uid_input{
