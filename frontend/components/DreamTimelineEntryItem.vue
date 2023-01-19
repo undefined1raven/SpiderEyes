@@ -289,4 +289,9 @@ export default {
   height: 900%;
   margin-bottom: 4.99378882%;
 }
+@media only screen and (max-width: 700px) and (max-height: 900px) {
+  .dream_timeline_entry_item_container {
+    height: 490%;
+  }
+}
 </style>

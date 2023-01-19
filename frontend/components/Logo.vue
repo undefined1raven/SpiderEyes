@@ -54,4 +54,10 @@ export default Vue.extend({
 .logo{
     position: absolute;
 }
+@media only screen and (max-width: 700px) and (max-height: 900px) {
+  .logo{
+    width: 3vh;
+    height: 2.9vh;
+  }
+}
 </style>

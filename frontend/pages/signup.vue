@@ -196,6 +196,77 @@ export default {
   height: 5.277777778%;
   width: 41.510416667%;
 }
+@media only screen and (max-width: 700px) and (max-height: 900px) {
+  #login_deco {
+    top: 0%;
+    height: 21.09375%;
+    width: 100%;
+    left: 0%;
+    overflow: hidden;
+  }
+  #logo {
+    top: 21.575%;
+    width: 85.947222222%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  #uid_input,
+  #password_input,
+  #email_input {
+    width: 85.555555556%;
+    left: 50%;
+    transform: translate(-50%);
+    height: 4%;
+  }
+  #username_l,
+  #password_l,
+  #email_l {
+    left: 6.222222222%;
+  }
+  #login_btn,
+  #create_account_btn {
+    width: 85.555555556% !important;
+    left: 50%;
+    height: 6% !important;
+    transform: translate(-50%);
+  }
+  #login_btn {
+    top: 79.84375%;
+  }
+  #create_account_btn {
+    top: 89.6875%;
+  }
+  #login_ln_0,
+  #login_ln_1 {
+    width: 100%;
+    left: 0%;
+  }
+  #login_ln_0 {
+    top: 41.5%;
+  }
+  #login_ln_1 {
+    top: 74.803125%;
+  }
+
+  #password_l {
+    top: calc(58.888888889% + 4%);
+  }
+  #username_l {
+    top: calc(40.37037037% + 4%);
+  }
+  #email_l {
+    top: calc(49.722222222% + 4%);
+  }
+  #email_input {
+    top: calc(52.592592593% + 4%);
+  }
+  #uid_input {
+    top: calc(43.425925926% + 4%);
+  }
+  #password_input {
+    top: calc(61.759259259% + 4%);
+  }
+}
 </style>
 
 <style>

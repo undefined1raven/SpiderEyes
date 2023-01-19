@@ -279,4 +279,11 @@ export default {
   width: 29.659498208%;
   height: 13.590844063%;
 }
+@media only screen and (max-width: 700px) and (max-height: 900px) {
+  .sense_chart_container{
+    top: 0%;
+    left: 0%;
+    width: 90%;
+  }
+}
 </style>

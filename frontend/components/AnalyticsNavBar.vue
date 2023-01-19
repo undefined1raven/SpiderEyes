@@ -6,6 +6,10 @@ import BaseLabel from '@/components/BaseLabel.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import DreamTimelineEntryItem from '@/components/DreamTimelineEntryItem.vue'
 import Logo from '@/components/Logo.vue'
+
+import isMobile from '@/composables/isMobile.ts'
+import percentage from '@/composables/percentage.ts'
+import rangeScaler from '@/composables/rangeScaler.ts'
 </script>
 
 <script>
@@ -53,6 +57,7 @@ export default {
 
 <template>
   <div class="analytics_nav_bar_container">
+    <div id="mobile_title_bkg" v-show="isMobile()"></div>
     <Logo id="logo"></Logo>
     <BaseLabel
       id="spiderEyes_l"
@@ -198,19 +203,19 @@ export default {
     50% 50% at 50% 50%,
     #4900a7 0%,
     rgba(73, 0, 167, 0.05) 100%
-  );
-}
-#logo_ln {
-  top: 11.944444444%;
-}
-#spiderEyes_l {
-  top: 8.148148148%;
-  font-size: 3vh;
-}
-#logo {
-  top: 0.648148148%;
-}
-.analytics_nav_bar_container {
+    );
+  }
+  #logo_ln {
+    top: 11.944444444%;
+  }
+  #spiderEyes_l {
+    top: 8.148148148%;
+    font-size: 3vh;
+  }
+  #logo {
+    top: 0.648148148%;
+  }
+  .analytics_nav_bar_container {
   position: absolute;
   top: 0%;
   left: 0%;
@@ -221,9 +226,35 @@ export default {
     rgba(36, 0, 82, 0.6) 0%,
     rgba(19, 0, 74, 0.6) 99.99%,
     rgba(15, 0, 74, 0.6) 100%
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media only screen and (max-width: 700px) and (max-height: 900px) {
+    .analytics_nav_bar_container{
+      width: 100%;
+      height: 100%;
+      background-color: #4900a700;
+      background: #4900a700;
+    }
+    #spiderEyes_l{
+      top: 3.43125%;
+      left: 55.777777778%;
+    }
+    #logo{
+      top: 2.03125%;
+      left: 3.444444444%;
+      width: 43.722222222%;
+      height: 6.5625%;
+    }
+    #mobile_title_bkg{
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 12.4%;
+      background: linear-gradient(180deg, rgba(82, 0, 255, 0.3) 0%, rgba(26, 0, 60, 0.15) 100%);
+    }
+  }
+  </style>

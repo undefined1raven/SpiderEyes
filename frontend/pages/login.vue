@@ -232,8 +232,8 @@ export default {
   #uid_input, #password_input{
     width: 85.555555556%;
     left: 50%;
-    height: 6%;
     transform: translate(-50%);
+    height: 6%;
   }
   #uid_input{
     top: 49.6875%;
@@ -261,6 +261,11 @@ export default {
   }
   .primary_l{
     left: 6.222222222%;
+  }
+  #auth_failed_l{
+    left: 0%;
+    width: 100%;
+    top: 41.5%;
   }
 }
 </style>

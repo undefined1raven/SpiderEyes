@@ -8,7 +8,6 @@ import SenseChart from '@/components/SenseChart.vue'
 import isMobile from '@/composables/isMobile.ts'
 import percentage from '@/composables/percentage.ts'
 import rangeScaler from '@/composables/rangeScaler.ts'
-import { tSExpressionWithTypeArguments } from '@babel/types'
 </script>
 
 
@@ -79,23 +78,34 @@ export default {
       }
       this.updateGlobalDreamObj()
     },
-    propertiesSourceController(){
-      if(this.readOnly){
+    propertiesSourceController() {
+      if (this.readOnly) {
         return this.propertiesIn
-      }else{
+      } else {
         return this.properties
       }
     },
-    globalChartsRedraw(){
-      let refArray = ['touchChartRef', 'sightChartRef', 'hearingChartRef', 'smellChartRef', 'accChartRef', 'loveChartRef' ,'fearChartRef', 'happinessChartRef', 'sadnessChartRef', 'angerChartRef']
-      refArray.forEach(e => {
+    globalChartsRedraw() {
+      let refArray = [
+        'touchChartRef',
+        'sightChartRef',
+        'hearingChartRef',
+        'smellChartRef',
+        'accChartRef',
+        'loveChartRef',
+        'fearChartRef',
+        'happinessChartRef',
+        'sadnessChartRef',
+        'angerChartRef',
+      ]
+      refArray.forEach((e) => {
         this.$refs[e].redraw()
       })
     },
   },
   expose: ['globalChartsRedraw'],
   props: {
-    readOnly: {default: false},
+    readOnly: { default: false },
     propertiesIn: {
       type: Object,
       default: () => {
@@ -178,17 +188,19 @@ export default {
       :input="propertiesSourceController().senses.acc"
     ></SenseChart>
     <BaseLabel
+      v-show="!isMobile()"
       id="sensorial_intensity_l"
       v-text="'Sensorial Intensity'"
       color="#8F34FF"
       ></BaseLabel>
       <BaseLabel
+        v-show="!isMobile()"
       id="emotional_intensity_l"
       v-text="'Emotional Intensity'"
       color="#8F34FF"
     ></BaseLabel>
-    <VerticalLine id="properties_dock_ln_1" color="#0500FF00"></VerticalLine>
-    <VerticalLine id="properties_dock_ln_2" color="#0500FF00"></VerticalLine>
+    <VerticalLine v-show="!isMobile()" id="properties_dock_ln_1" color="#0500FF00"></VerticalLine>
+    <VerticalLine v-show="!isMobile()" id="properties_dock_ln_2" color="#0500FF00"></VerticalLine>
     <SenseChart ref="loveChartRef" :readOnly="readOnly" :input="propertiesSourceController().senses.love" class="x_chart_e" @loveChartUpdate="SenseChartUpdate" updateEventName="loveChartUpdate" chartID="love" id="love_chart" label="Love"></SenseChart>
     <SenseChart ref="fearChartRef" :readOnly="readOnly" :input="propertiesSourceController().senses.fear" class="x_chart_e" @fearChartUpdate="SenseChartUpdate" updateEventName="fearChartUpdate" chartID="fear" id="fear_chart" label="Fear"></SenseChart>
     <SenseChart ref="happinessChartRef" :readOnly="readOnly" :input="propertiesSourceController().senses.happiness" class="x_chart_e" @happinessChartUpdate="SenseChartUpdate" updateEventName="happinessChartUpdate" chartID="happiness" id="happiness_chart" label="Happiness"></SenseChart>
@@ -464,5 +476,55 @@ input[type='time']::-webkit-calendar-picker-indicator {
     rgba(19, 0, 74, 0.6) 99.99%,
     rgba(15, 0, 74, 0.6) 100%
   );
+}
+@media only screen and (max-width: 700px) and (max-height: 900px) {
+  .properties_dock_container {
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background: #00000000;
+  }
+  .x_chart {
+    left: 2.777777778%;
+  }
+  #acceleration_chart,
+  #anger_chart {
+    top: calc(89.154704944% + 56%);
+  }
+  #anger_chart{
+    top: calc(89.154704944% + 72%);
+  }
+  #smell_chart,
+  #sadness_chart {
+    top: calc(71.610845295% + 40%);
+  }
+  #sadness_chart{
+    top: calc(71.610845295% + 56%);
+  }
+  #hearing_chart,
+  #happiness_chart {
+    top: calc(54.066985646% + 24%);
+  }
+  #happiness_chart{
+    top: calc(54.066985646% + 40%);
+  }
+  #touch_chart,
+  #fear_chart {
+    top: calc(36.523125997% - 5%);
+  }
+  #sight_chart,
+  #love_chart {
+    top: calc(20.414673046% - 10%);
+  }
+  #love_chart{
+    top: calc(20.414673046% + 8%);
+  }
+  #fear_chart{
+    top: calc(36.523125997% + 8%);
+  }
+  #touch_chart{
+    top: calc(36.523125997% + 24%);
+  }
 }
 </style>

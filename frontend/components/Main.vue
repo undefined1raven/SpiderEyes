@@ -12,6 +12,10 @@ import MainSaveButtonDeco from '@/components/MainSaveButtonDeco.vue'
 import ContentTagsDock from '@/components/ContentTagsDock.vue'
 import TypeTimelineDock from '@/components/TypeTimelineDock.vue'
 import ReferencesDock from '@/components/ReferencesDock.vue'
+
+import isMobile from '@/composables/isMobile.ts'
+import percentage from '@/composables/percentage.ts'
+import rangeScaler from '@/composables/rangeScaler.ts'
 </script>
 
 
@@ -43,11 +47,16 @@ export default {
       setTimeout(() => {
         this.$refs.propertiesDockRef.globalChartsRedraw()
       }, 50)
+      this.windowState.dream = true
+      this.windowState.timeline = false
+      window.location.hash = 'dream'
     },
     createNewDream() {
       this.isInViewDreamMode.status = false
       this.isInViewAnalyticsMode = false
       this.isInViewDreamMode.index = 0
+      this.windowState.dream = true
+      this.windowState.timeline = false
     },
     onViewAnalytics() {
       this.isInViewAnalyticsMode = true
@@ -101,17 +110,31 @@ export default {
             `https://spidereyes-api.vercel.app/api/dbop?saveDream=0&AT=${this.AT}`,
             this.dreamObj
           ) //https://spidereyes-api.vercel.app/api/dbop
-          .then((r) => {this.decoIsActive = true})
+          .then((r) => {
+            this.decoIsActive = true
+          })
           .catch((e) => {})
       }
     },
   },
   mounted() {
+    window.addEventListener('hashchange', (e) => {
+      let newHash = e.newURL.split('#')[1];
+      if(newHash == 'dream'){
+        this.windowState.dream = true;
+        this.windowState.timeline = false;
+      }else if(newHash == 'timeline') {
+        this.windowState.dream = false;
+        this.windowState.timeline = true;
+
+      }
+    })
+    window.location.hash = 'timeline'
     this.AT = sessionStorage.getItem('AT')
     this.username = sessionStorage.getItem('un')
     if (this.AT != undefined) {
       if (this.AT != '' && this.AT.length > 6) {
-        this.dreamFetcher(20, this.AT)
+        this.dreamFetcher(50, this.AT)
           .then((res) => {
             if (res.status) {
               this.retrievedDreams = res.data.dreamArray
@@ -131,6 +154,7 @@ export default {
   },
   data() {
     return {
+      windowState: { timeline: true, dream: false },
       decoIsActive: true,
       username: '--',
       AT: '',
@@ -156,6 +180,7 @@ export default {
 <template>
   <div id="main">
     <AnalyticsNavBar
+      v-show="(isMobile() && windowState.timeline) || !isMobile()"
       @newDreamSelected="newDreamSelected"
       @createNewDream="createNewDream"
       @onViewAnalytics="onViewAnalytics"
@@ -167,22 +192,26 @@ export default {
     <Transition name="tini">
       <div id="main" v-if="isInViewDreamMode.status || !isInViewAnalyticsMode">
         <PropertiesDock
+          v-show="!isMobile() || (isMobile() && windowState.dream)"
           ref="propertiesDockRef"
           :readOnly="isInViewDreamMode.status"
           :propertiesIn="dreamRetriever().properties"
           @updateDreamObj="descriptionDockOnUpdateDreamObj"
         ></PropertiesDock>
         <DescriptionDock
+          v-show="!isMobile() || (!isMobile() && windowState.dream)"
           @updateDreamObj="descriptionDockOnUpdateDreamObj"
           :readOnly="isInViewDreamMode.status"
           :description="dreamRetriever().longDescription"
         ></DescriptionDock>
         <ContentTagsDock
+          v-show="!isMobile() || (!isMobile() && windowState.dream)"
           :readOnly="isInViewDreamMode.status"
           :contentTagsIn="dreamRetriever().contentTags"
           @updateDreamObj="descriptionDockOnUpdateDreamObj"
         ></ContentTagsDock>
         <TypeTimelineDock
+          v-show="!isMobile() || (!isMobile() && windowState.dream)"
           :typeTimelineStagesIn="
             dreamRetriever().typeTimeline.typeTimelineStages
           "
@@ -191,11 +220,13 @@ export default {
           @updateDreamObj="descriptionDockOnUpdateDreamObj"
         ></TypeTimelineDock>
         <ReferencesDock
+          v-show="!isMobile() || (!isMobile() && windowState.dream)"
           :readOnly="isInViewDreamMode.status"
           :refsIn="dreamRetriever().references"
           @updateDreamObj="descriptionDockOnUpdateDreamObj"
         ></ReferencesDock>
         <BaseButton
+          v-show="!isMobile() || (!isMobile() && windowState.dream)"
           onClickEventName="onSaveDream"
           @onSaveDream="onSaveDream"
           :HoverColorSet="saveButtonTextController().HoverColorSet"
@@ -208,6 +239,7 @@ export default {
           }"
         ></BaseButton>
         <MainSaveButtonDeco
+          v-show="!isMobile() || (!isMobile() && windowState.dream)"
           ref="deco1"
           :rate="decoRate"
           :color="decoColor"
@@ -215,6 +247,7 @@ export default {
           id="save_btn_deco_left"
         ></MainSaveButtonDeco>
         <MainSaveButtonDeco
+          v-show="!isMobile() || (!isMobile() && windowState.dream)"
           ref="deco2"
           :rate="decoRate"
           :color="decoColor"
@@ -260,5 +293,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media only screen and (max-width: 700px) and (max-height: 900px) {
 }
 </style>
