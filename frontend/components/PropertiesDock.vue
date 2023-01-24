@@ -172,8 +172,13 @@ export default {
       id="properties_l"
       v-text="'Properties'"
       color="#8F34FF"
+      v-show="!isMobile()"
     ></BaseLabel>
-    <HorizontalLine id="prop_ln_0" color="#0500FF00"></HorizontalLine>
+    <HorizontalLine 
+    v-show="!isMobile()"
+    id="prop_ln_0" 
+    color="#0500FF00">
+  </HorizontalLine>
     <SenseChart ref="touchChartRef" :readOnly="readOnly" :input="propertiesSourceController().senses.touch" @touchChartUpdate="SenseChartUpdate" updateEventName="touchChartUpdate" chartID="touch" class="x_chart" id="touch_chart" label="Touch"></SenseChart>
     <SenseChart ref="sightChartRef" :readOnly="readOnly" :input="propertiesSourceController().senses.sight" @sightChartUpdate="SenseChartUpdate" updateEventName="sightChartUpdate" chartID="sight" class="x_chart" id="sight_chart" label="Sight"></SenseChart>
     <SenseChart ref="hearingChartRef" :readOnly="readOnly" :input="propertiesSourceController().senses.hearing" @hearingChartUpdate="SenseChartUpdate" updateEventName="hearingChartUpdate" chartID="hearing" class="x_chart" id="hearing_chart" label="Hearing"></SenseChart>
@@ -478,53 +483,64 @@ input[type='time']::-webkit-calendar-picker-indicator {
   );
 }
 @media only screen and (max-width: 700px) and (max-height: 900px) {
+
   .properties_dock_container {
-    top: 0%;
+    top: 9.34375%;
     left: 0%;
-    width: 100%;
-    height: 100%;
+    width: 99.7%;
+    height: 81.2875%;
+    /* overflow-y: scroll; */
     background: #00000000;
+  }
+
+  .properties_dock_container::-webkit-scrollbar {
+    width: 0vh;
+    height: 0;
+  }
+  .properties_dock_container::-webkit-scrollbar-track {
+    background-color: #4900a700;
   }
   .x_chart {
     left: 2.777777778%;
   }
   #acceleration_chart,
   #anger_chart {
-    top: calc(89.154704944% + 56%);
+    top: calc(89.154704944% - 6%);
   }
-  #anger_chart{
-    top: calc(89.154704944% + 72%);
+  #anger_chart {
+    top: calc(89.154704944% + 4%);
+    border: none;
   }
   #smell_chart,
   #sadness_chart {
-    top: calc(71.610845295% + 40%);
+    top: calc(71.610845295% - 9%);
   }
-  #sadness_chart{
-    top: calc(71.610845295% + 56%);
+  #sadness_chart {
+    top: calc(71.610845295% + 1%);
   }
   #hearing_chart,
   #happiness_chart {
-    top: calc(54.066985646% + 24%);
+    top: calc(54.066985646% - 13%);
   }
-  #happiness_chart{
-    top: calc(54.066985646% + 40%);
+  #happiness_chart {
+    top: calc(54.066985646% - 2%);
   }
   #touch_chart,
   #fear_chart {
-    top: calc(36.523125997% - 5%);
+    top: calc(36.523125997% - 15%);
   }
   #sight_chart,
   #love_chart {
+    top: calc(20.414673046% - 20%);
+  }
+  #love_chart {
     top: calc(20.414673046% - 10%);
   }
-  #love_chart{
-    top: calc(20.414673046% + 8%);
+  #fear_chart {
+    top: calc(36.523125997% - 16%);
   }
-  #fear_chart{
-    top: calc(36.523125997% + 8%);
-  }
-  #touch_chart{
-    top: calc(36.523125997% + 24%);
+  #touch_chart {
+    top: calc(36.523125997% - 6%);
   }
 }
 </style>

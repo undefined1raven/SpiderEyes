@@ -12,6 +12,7 @@ import MainSaveButtonDeco from '@/components/MainSaveButtonDeco.vue'
 import ContentTagsDock from '@/components/ContentTagsDock.vue'
 import TypeTimelineDock from '@/components/TypeTimelineDock.vue'
 import ReferencesDock from '@/components/ReferencesDock.vue'
+import NavTop from '@/components/M_NavTop.vue'
 
 import isMobile from '@/composables/isMobile.ts'
 import percentage from '@/composables/percentage.ts'
@@ -101,6 +102,16 @@ export default {
         }
       }
     },
+    mobileNavDreamWIDParser() {
+      const WID_Map = {
+        properties: 'Properties',
+        refs: 'Refs',
+        content_tags: 'Content Tags',
+        dream_type: 'Dream Type',
+        description: 'Description',
+      }
+      return WID_Map[this.windowState.dreamWID];
+    },
     onSaveDream() {
       if (!this.isInViewDreamMode.status) {
         this.dreamObj['tx'] = Date.now()
@@ -116,17 +127,19 @@ export default {
           .catch((e) => {})
       }
     },
+    backButtonOnClick() {
+      window.location.hash = 'timeline'
+    },
   },
   mounted() {
     window.addEventListener('hashchange', (e) => {
-      let newHash = e.newURL.split('#')[1];
-      if(newHash == 'dream'){
-        this.windowState.dream = true;
-        this.windowState.timeline = false;
-      }else if(newHash == 'timeline') {
-        this.windowState.dream = false;
-        this.windowState.timeline = true;
-
+      let newHash = e.newURL.split('#')[1]
+      if (newHash == 'dream') {
+        this.windowState.dream = true
+        this.windowState.timeline = false
+      } else if (newHash == 'timeline') {
+        this.windowState.dream = false
+        this.windowState.timeline = true
       }
     })
     window.location.hash = 'timeline'
@@ -154,7 +167,7 @@ export default {
   },
   data() {
     return {
-      windowState: { timeline: true, dream: false },
+      windowState: { timeline: true, dream: false, dreamWID: 'properties' },
       decoIsActive: true,
       username: '--',
       AT: '',
@@ -256,6 +269,22 @@ export default {
         ></MainSaveButtonDeco>
       </div>
     </Transition>
+    <BaseButton
+      v-if="isMobile() && windowState.dream"
+      width="94.288888889%"
+      height="5.15625%"
+      id="back_btn"
+      onClickEventName="click"
+      @click="backButtonOnClick"
+      :label="{ text: 'Back', fontSize: '3vh' }"
+    ></BaseButton>
+    <HorizontalLine
+      v-show="isMobile() && windowState.dream"
+      id="back_btn_ln"
+      color="#4900a7"
+    >
+    </HorizontalLine>
+    <NavTop :hasOptions="true" :options="[{label: 'Senses', enabled: true}, {label: 'Scores', enabled: false}]" v-if="isMobile() && windowState.dream" :title="mobileNavDreamWIDParser()"></NavTop>
   </div>
 </template>
 
@@ -295,5 +324,16 @@ export default {
   justify-content: center;
 }
 @media only screen and (max-width: 700px) and (max-height: 900px) {
+  #back_btn {
+    top: 93.125%;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  #back_btn_ln {
+    top: 91.125%;
+    width: 94.288888889%;
+    left: 50%;
+    transform: translate(-50%);
+  }
 }
 </style>

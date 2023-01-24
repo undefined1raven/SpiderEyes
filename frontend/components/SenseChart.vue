@@ -38,7 +38,7 @@ export default {
       timelineMouseXY: { x: -1, y: -1 },
     }
   },
-  mounted(){
+  mounted() {
     // setInterval(() => {
     //   this.redraw()
     // }, 50);
@@ -54,8 +54,7 @@ export default {
           for (let ix = this.input.maxIntensityValue + 1; ix <= 7; ix++) {
             this[`isEnabled_${ix}`] = 'inactive'
           }
-        }
-        else{
+        } else {
           for (let ix = 0; ix <= 7; ix++) {
             this[`isEnabled_${ix}`] = 'inactive'
           }
@@ -79,12 +78,9 @@ export default {
       // if (this.readOnly) {
       //   for (let ix = 0; ix < this.input.timelinePoints.length; ix++) {
       //     let box = document.getElementsByClassName('sense_chart_timeline_graph_container')[0].getBoundingClientRect()
-
       //     let x = (this.input.timelinePoints[ix].x - box.left) * -1
       //     let y = (this.input.timelinePoints[ix].y - box.top) * -1
-
       //     console.log(`x :${x} | y: ${y}`)
-
       //     let point = document.createElement('div')
       //     point.className = 'sense_chart_timeline_graph_point'
       //     point.style.position = 'absolute'
@@ -214,6 +210,7 @@ export default {
       ></div>
     </ul>
     <div
+      v-if="false"
       ref="SenseChartTimeline"
       @mousedown="SenseChartTimelineOnMouseDown"
       @mouseup="SenseChartTimelineOnMouseUp"
@@ -280,10 +277,18 @@ export default {
   height: 13.590844063%;
 }
 @media only screen and (max-width: 700px) and (max-height: 900px) {
-  .sense_chart_container{
+  .sense_chart_container {
     top: 0%;
     left: 0%;
     width: 90%;
+    height: 7.590844063%;
+    border-bottom: solid 1px #260056;
+  }
+  .sense_chart_max_intensity_container{
+    height: 30%;;
+  }
+  .sense_chart_timeline_graph_container{
+    height: 0%;
   }
 }
 </style>

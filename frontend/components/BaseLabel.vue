@@ -3,12 +3,18 @@
 export default {
   props: {
     color: "",
+    clickEventName: {default: ''}
   },
+  methods: {
+    click(){
+      this.$emit(this.clickEventName);
+    }
+  }
 };
 </script>
 
 <template>
-  <div class="l dynamic-font-weight" :style="`color: ${color};`"></div>
+  <div @click="click" class="l dynamic-font-weight" :style="`color: ${color};`"></div>
 </template>
 <style scoped>
 .l {
