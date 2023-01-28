@@ -1,5 +1,5 @@
 
-<script setup lang="ts">
+<script setup>
 import VerticalLine from '@/components/VerticalLine.vue'
 import HorizontalLine from '@/components/HorizontalLine.vue'
 import BaseLabel from '@/components/BaseLabel.vue'
@@ -10,7 +10,7 @@ import percentage from '@/composables/percentage.ts'
 import rangeScaler from '@/composables/rangeScaler.ts'
 </script>
 
-<script lang="ts">
+<script>
 export default {
   props: {
     title: { default: '--' },
@@ -27,11 +27,13 @@ export default {
     }
   },
   methods: {
+    onDropdownMenuClick(){
+      this.$emit('onDropdownMenuClick');
+    },  
     optionButtonOnClick() {
       this.isOptionOneEnabled = !this.isOptionOneEnabled
-      console.log(this.isOptionOneEnabled)
     },
-    optionButtonStyleController(buttonState: boolean, isReversed: boolean) {
+    optionButtonStyleController(buttonState, isReversed) {
       if (buttonState) {//Uses isReversed to control the styles of both buttons at the same time
         if (isReversed) {
           return { color: '#4D00AD' }
@@ -52,7 +54,7 @@ export default {
 
 <template>
   <div class="nav_top_container">
-    <BaseLabel color="#770AFF" class="title_l" v-text="title"></BaseLabel>
+    <BaseLabel @onDropdownMenuClick="onDropdownMenuClick" clickEventName="onDropdownMenuClick" color="#770AFF" class="title_l" v-text="title"></BaseLabel>
     <HorizontalLine class="title_ln" color="#0500FF00"></HorizontalLine>
     <VerticalLine class="title_ln_1" color="#0500FF00"></VerticalLine>
     <BaseLabel
@@ -89,10 +91,33 @@ export default {
       :color="optionButtonStyleController(isOptionOneEnabled, true).color"
       class="option_btn_indi_1"
     ></HorizontalLine>
+    <VerticalLine class="title_dropdown_ln_0" color="#770AFF"></VerticalLine>
+    <VerticalLine class="title_dropdown_p p0" color="#770AFF"></VerticalLine>
+    <VerticalLine class="title_dropdown_p p1" color="#770AFF"></VerticalLine>
+    <VerticalLine class="title_dropdown_p p2" color="#770AFF"></VerticalLine>
   </div>
 </template>
 
 <style scoped>
+.p0{
+  top: 37%;
+}
+.p1{
+  top: 47%;
+}
+.p2{
+  top: 57%;
+}
+.title_dropdown_p{
+  width: 0.3vh;
+  height: 0.3vh;
+  left: 1.4%;
+}
+.title_dropdown_ln_0{
+  top: 0%;
+  left: 0%;
+  height: 99%;
+}
 .option_btn_indi_0,
 .option_btn_indi_1 {
   top: 72.565217391%;
@@ -120,6 +145,7 @@ export default {
   z-index: 10;
   transition: all linear 0.1s;
   transition: color ease-out 0.2s;
+  border-radius: 4px;
 }
 .title_ln_1 {
   background: radial-gradient(
@@ -142,7 +168,12 @@ export default {
 }
 .title_l {
   font-size: 2.6vh;
-  left: 5%;
+  left: 0%;
+  width: 35.277777778%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;;
 }
 .nav_top_container {
   position: absolute;

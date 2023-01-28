@@ -13,6 +13,7 @@ import ContentTagsDock from '@/components/ContentTagsDock.vue'
 import TypeTimelineDock from '@/components/TypeTimelineDock.vue'
 import ReferencesDock from '@/components/ReferencesDock.vue'
 import NavTop from '@/components/M_NavTop.vue'
+import NavDropdown from '@/components/M_NavDropdown.vue'
 
 import isMobile from '@/composables/isMobile.ts'
 import percentage from '@/composables/percentage.ts'
@@ -112,6 +113,9 @@ export default {
       }
       return WID_Map[this.windowState.dreamWID];
     },
+    onDropdownMenuClick(){
+      this.isDropdownMenuEnabled = !this.isDropdownMenuEnabled;
+    },
     onSaveDream() {
       if (!this.isInViewDreamMode.status) {
         this.dreamObj['tx'] = Date.now()
@@ -130,6 +134,10 @@ export default {
     backButtonOnClick() {
       window.location.hash = 'timeline'
     },
+    newDreamWID(args){
+      this.windowState.dreamWID = args
+      console.log(this.windowState.dreamWID)
+    }
   },
   mounted() {
     window.addEventListener('hashchange', (e) => {
@@ -167,6 +175,7 @@ export default {
   },
   data() {
     return {
+      isDropdownMenuEnabled: false,
       windowState: { timeline: true, dream: false, dreamWID: 'properties' },
       decoIsActive: true,
       username: '--',
@@ -205,20 +214,20 @@ export default {
     <Transition name="tini">
       <div id="main" v-if="isInViewDreamMode.status || !isInViewAnalyticsMode">
         <PropertiesDock
-          v-show="!isMobile() || (isMobile() && windowState.dream)"
+          v-show="!isMobile() || (isMobile() && windowState.dream && windowState.dreamWID == 'properties')"
           ref="propertiesDockRef"
           :readOnly="isInViewDreamMode.status"
           :propertiesIn="dreamRetriever().properties"
           @updateDreamObj="descriptionDockOnUpdateDreamObj"
         ></PropertiesDock>
         <DescriptionDock
-          v-show="!isMobile() || (!isMobile() && windowState.dream)"
+          v-show="!isMobile() || (!isMobile() && windowState.dream && windowState.dreamWID == 'description')"
           @updateDreamObj="descriptionDockOnUpdateDreamObj"
           :readOnly="isInViewDreamMode.status"
           :description="dreamRetriever().longDescription"
         ></DescriptionDock>
         <ContentTagsDock
-          v-show="!isMobile() || (!isMobile() && windowState.dream)"
+          v-show="!isMobile() || (!isMobile() && windowState.dream && windowState.dreamWID == 'contentTags')"
           :readOnly="isInViewDreamMode.status"
           :contentTagsIn="dreamRetriever().contentTags"
           @updateDreamObj="descriptionDockOnUpdateDreamObj"
@@ -284,7 +293,8 @@ export default {
       color="#4900a7"
     >
     </HorizontalLine>
-    <NavTop :hasOptions="true" :options="[{label: 'Senses', enabled: true}, {label: 'Scores', enabled: false}]" v-if="isMobile() && windowState.dream" :title="mobileNavDreamWIDParser()"></NavTop>
+    <NavTop @onDropdownMenuClick="onDropdownMenuClick" :hasOptions="true" :options="[{label: 'Senses', enabled: true}, {label: 'Scores', enabled: false}]" v-if="isMobile() && windowState.dream" :title="mobileNavDreamWIDParser()"></NavTop>
+    <NavDropdown :activeWID="windowState.dreamWID" @newDreamWID="newDreamWID" :isDropdownMenuEnabled="isDropdownMenuEnabled" v-if="isMobile() && windowState.dream"></NavDropdown>
   </div>
 </template>
 

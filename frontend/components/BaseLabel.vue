@@ -6,8 +6,8 @@ export default {
     clickEventName: {default: ''}
   },
   methods: {
-    click(){
-      this.$emit(this.clickEventName);
+    click(e){
+      this.$emit(this.clickEventName, e);
     }
   }
 };
